@@ -1,0 +1,9 @@
+/node_modules
+/node
+/target*
+/.idea
+*.iml
+release.properties
+pom.xml.releaseBackup
+.DS_Store
+/amps-standalone-bitbucket-*

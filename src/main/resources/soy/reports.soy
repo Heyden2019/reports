@@ -1,0 +1,41 @@
+{namespace reports}
+
+/**
+ * @param pullRequest
+ */
+{template .page}
+    {let $repository: $pullRequest.toRef.repository /}
+
+    {webResourceManager_requireResourcesForContext('bitbucket.pullrequest.newtab.reports')}
+
+    <html>
+        <head>
+            <meta name="decorator" content="bitbucket.pullrequest.view">
+            <meta name="projectKey" content="{$repository.project.key}">
+            <meta name="repositorySlug" content="{$repository.slug}">
+            <meta name="pullRequestId" content="{$pullRequest.id}">
+            <meta name="activeTab" content="reports-tab">
+            <title>Pull Request #{$pullRequest.id}: {$pullRequest.title}</title>
+        </head>
+        <body>
+            <fieldset class="parameters hidden">
+                <input type="hidden" id="projectKey" value="{$repository.project.key}">
+                <input type="hidden" id="repositorySlug" value="{$repository.slug}">
+                <input type="hidden" id="pullRequestId" value="{$pullRequest.id}">
+            </fieldset>
+            <div class="reports_content">
+                <div class="total_comments">
+                    <h4>{getText('pullreqreports.Comments')}</h4>
+                    <hr/>
+                    <h3 id="total_comments"></h3>
+                </div>
+                <div class="comments_per_user">
+                    <h4>{getText('pullreqreports.Comments_per_user')}</h4>
+                    <hr/>
+                    <svg id="reports"></svg>
+                </div>
+                <div id="tooltip"></div>
+            </div>
+        </body>
+    </html>
+{/template}

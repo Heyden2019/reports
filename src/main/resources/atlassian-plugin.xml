@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+
+  <resource type="i18n" name="i18n" location="reports-plugin"/>
+
+  <web-item name="pull request plugin" key="reports-tab" section="bitbucket.pull-request.nav">
+    <label key="pullreqreports.tab_name"/>
+    <link>${reportUrl}</link>
+    <context-provider class="com.atlassian.reports.servlet.ReportUrlContextProvider"/>
+  </web-item>
+
+  <web-resource key="reports-plugin-resources" name="reports-plugin Web Resources">
+    <dependency>com.atlassian.bitbucket.server.bitbucket-web-api:navbuilder</dependency>
+    <resource type="download" name="reports-plugin.css" location="/css/reports-plugin.css"/>
+    <resource type="download" name="init.js" location="/js_ES5/init.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>bitbucket.pullrequest.newtab.reports</context>
+  </web-resource>
+
+  <servlet name="Reports Servlet" key="reports-servlet" class="com.atlassian.reports.servlet.ReportsServlet">
+    <description key="reports-servlet.description">The Reports Servlet Plugin</description>
+    <url-pattern>/reports/*</url-pattern>
+  </servlet>
+  <client-resource key="report-templates">
+    <directory location="/soy/"/>
+  </client-resource>
+
+</atlassian-plugin>
